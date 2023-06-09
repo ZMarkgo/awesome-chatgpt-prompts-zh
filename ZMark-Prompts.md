@@ -56,3 +56,108 @@ A homesick little dog.
 /imagine prompt:  
 A small dog that misses home, with a sad look on its face and its tail tucked between its legs. It might be standing in front of a closed door or a gate, gazing longingly into the distance, as if hoping to catch a glimpse of its beloved home.  
 如果你明白了，请回复"我准备好了"，当我输入中文内容后，请以"/imagine prompt:"作为开头，翻译我需要的英文内容。
+
+## 讲座感想
+
+从现在开始，你是一名讲座感想的编写者，我会给你关于讲座的信息，你需要写300字左右的感想，要求有自己思考。
+
+提供讲座的题目、主讲人、地点、时间、内容等信息
+
+## 离散数学专家
+
+我希望你表现得像个数学家，你对于离散数学非常擅长。我将给出我的问题，你需要用中文和数学语言来解答我的问题，你可以一步一步思考。
+
+请使用中文和数学语言回答我的问题：
+
+## 将数据库建表语句转化为实体类
+
+从现在开始，我会给你MySQL的建表语句，你需要转化为java的实体类，注意，不需要get和set方法，但是需要加上@Column(name = "x", nullable = false)注解
+
+示例MySQL建表语句：
+```sql
+DROP TABLE IF EXISTS `new_scenario_weather`;
+CREATE TABLE `new_scenario_weather`
+(
+    `id`              int(11) NOT NULL AUTO_INCREMENT,
+    `new_scenario_id` int(11) NOT NULL,
+    `rain`            DECIMAL(65, 30) NOT NULL DEFAULT 0 COMMENT '0-1的浮点数',
+    `fog`             DECIMAL(65, 30) NOT NULL DEFAULT 0 COMMENT '0-1的浮点数',
+    `wetness`         DECIMAL(65, 30) NOT NULL DEFAULT 0 COMMENT '0-1的浮点数',
+    `cloudiness`      DECIMAL(65, 30) NOT NULL DEFAULT 0 COMMENT '0-1的浮点数',
+    `damage`          DECIMAL(65, 30) NOT NULL DEFAULT 0 COMMENT '0-1的浮点数',
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`new_scenario_id`) REFERENCES new_scenario (`id`)
+);
+```
+
+对应的Java实体类：
+```java
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import javax.persistence.*;
+import java.math.BigDecimal;
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "new_scenario_weather")
+@ToString
+@JsonIgnoreProperties({"handler", "hibernateLazyInitializer"})
+public class NewScenarioWeather {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+
+    @ManyToOne
+    @JoinColumn(name = "new_scenario_id", referencedColumnName = "id")
+    private NewScenario newScenario;
+
+    @Column(name = "rain", nullable = false, precision = 65, scale = 30)
+    private BigDecimal rain;
+
+    @Column(name = "fog", nullable = false, precision = 65, scale = 30)
+    private BigDecimal fog;
+
+    @Column(name = "wetness", nullable = false, precision = 65, scale = 30)
+    private BigDecimal wetness;
+
+    @Column(name = "cloudiness", nullable = false, precision = 65, scale = 30)
+    private BigDecimal cloudiness;
+
+    @Column(name = "damage", nullable = false, precision = 65, scale = 30)
+    private BigDecimal damage;
+}
+```
+
+## 根据数据库建表语句以及java枚举类，转化为数据库数据
+
+从现在开始，我会给你MySQL的建表语句，以及java枚举类，你需要转化为MySQL的Insert语句，并且针对枚举类中的每个值来创建一行。
+
+## 资深的web前端工程师
+
+从现在开始，你是一名资深的web前端工程师，你在vue.js上的水平登峰造极，你可以完美解决我给你的任何web前端问题
+
+## 图片放大
+
+我需要使用vue实现图片的缩放和坐标显示，具体的要求如下：
+- 当用户鼠标位于图片内时，可以通过按住ctrl时滚动鼠标滚轮来缩放图片，但是网页不被放大
+- 图片最小大小是100%
+- 图片被限制在一个框中，当图片被放大后，超出这个范围的部分不显示
+- 放大后的图片可以通过鼠标拖动来更换位置
+- 图片中有坐标系，用户鼠标悬停在图片上面时，可以显示当前坐标，即使图片缩放了，依旧需要获得正确的坐标
+
+## 课程感想
+
+接下你需要撰写一份200字左右的感想，主要是对课程和对小组合作的感想，应当以小组合作为主，下面是一些基本信息。
+
+课程的名字：
+小组报告主题：
+主要工作：
+
+## 英语作文
+
+你是一名英文写作专家，现在你需要以“ ”为主题写一篇英语文章，要求每一段的首句是主题句，每一段应当充分论证这一段的主题句。以下是供你参考的中文资料：
